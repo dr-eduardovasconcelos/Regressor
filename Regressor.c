@@ -15,6 +15,14 @@
     along with Regressor.  If not, see <https://www.gnu.org/licenses/>
 */
 
+/*
+	This program was developed by Eduardo Vasconcelos; associated professor on 
+	Federal Institute of Science, Education and Technology of Pernambuco.
+	
+	If you have any question about this program or the Combinatorial Regression, 
+	please, mail me at eduardo.vasconcelos@recife.ifpe.edu.br
+*/
+
 #include "csvReader.h"
 #include "completepolynomialregression.h"
 #include <stdio.h>
