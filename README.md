@@ -13,10 +13,16 @@ How do I execute Regressor and Regressor Polynomial?
 How do I Compile Regressor and Regressor Polynomial?
 
 - first, compile the libraries: gcc.exe -c -g completepolynomialregression.c -std=c11
+
 -- gcc.exe -c -g csvReader.c -std=c11
+
 - after, compile the program: gcc.exe Regressor.c -o Regressor csvReader.o completepolynomialregression.o -std=c11
+
 -- do the same for Regressor Polynomial. Note that, for Polynomial Regressor, the correct library is polynomialregression.c
+
 --- if you are using linux, use -lm to compile the programs.
+
 ---- example: gcc -c -g completepolynomialregression.c -std=c11 -lm
+
 
 for more information about combinatorial regression, please, access the manuscript: https://arxiv.org/abs/2009.12386
