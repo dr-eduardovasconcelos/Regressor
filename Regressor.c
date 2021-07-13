@@ -15,14 +15,6 @@
     along with Regressor.  If not, see <https://www.gnu.org/licenses/>
 */
 
-/*
-	This program was developed by Eduardo Vasconcelos; associated professor on 
-	Federal Institute of Science, Education and Technology of Pernambuco.
-	
-	If you have any question about this program or the Combinatorial Regression, 
-	please, mail me at eduardo.vasconcelos@recife.ifpe.edu.br
-*/
-
 #include "csvReader.h"
 #include "completepolynomialregression.h"
 #include <stdio.h>
@@ -33,7 +25,7 @@
 * This program receives arguments, and the first one is obrigatory.
 *  
 * This program generates two files, the first is a .txt with the RSquared value
-* and the regression formula in to be used in a spreadsheet tool,
+* and the regression formula, to be used in a spreadsheet tool,
 * and the second is a .csv file with the residues obtined from the model.
 */
 int main(int argc, char* argv[]){
@@ -103,7 +95,7 @@ int main(int argc, char* argv[]){
         averageY += *(Y + i);
 
 		/*
-		* Adding the beta_0 on polynomial
+		* Adding beta_0 to the polynomial
 		*/
         *(predicted + i) = *B;
 
@@ -154,7 +146,7 @@ int main(int argc, char* argv[]){
     fprintf(file, "this equation has a RSquared value of %lf \n", RSquared);
     fprintf(file, "put the following equation on cel A%i \n", variables + 1);
 
-    fprintf(file,"= %E + ",*B);
+    fprintf(file,"= %G + ",*B);
 
     for(int i = 1; i < columns; i++){
 
@@ -162,7 +154,7 @@ int main(int argc, char* argv[]){
         
         int limit = (int)(log(i)/log(degree+1))+1;
         
-        fprintf(file,"(%E)*",*(B + i));
+        fprintf(file,"(%G)*",*(B + i));
         
         for(j = 0; j < limit; j++) {
 
@@ -184,6 +176,21 @@ int main(int argc, char* argv[]){
         
     }
 
+    fclose(file);
+    
+    /*
+    * Writes a binary file with the coeficients. 
+    * This file can be useful when the equation is large.
+    * In some cases, with large equations, some coeficientes written into file, spreadsheet_equation.txt,
+    * can suffer from loss of precision, and these equations can return imprecise outcomes.
+    */
+    
+    file = fopen("binary_coeficients.bin","wb");
+    
+    fwrite(&variables, sizeof(int), 1, file);
+    fwrite(&degree, sizeof(int), 1, file);
+    fwrite(&(*B), sizeof(double) * columns , 1, file);
+    
     fclose(file);
     
     /*
