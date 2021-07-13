@@ -37,8 +37,6 @@
                 }
                 
                 _result = _equation(A);
-
-                //document.body.innerHTML += "<h3>response: " + _result + "</h3>";
                 
                 document.querySelector("#result").innerHTML = "<h3>last response: " + _result + "</h3>" + document.querySelector("#result").innerHTML;
                 
@@ -80,9 +78,6 @@
                 reader.onload = function (e) {
                     let rawData = e.target.result;
 
-                    //let b = new DataView(a.slice(8,16));
-                    //document.write(b.getFloat64(0, true));
-
                     const _variables = new DataView(rawData.slice(0, 4)).getInt32(0, true);
                     const _degree = new DataView(rawData.slice(4, 8)).getInt32(0, true);
 
@@ -99,17 +94,6 @@
                     columns = _columns;
 
                     B = _B;
-
-                    /*let _result = B[0];
-                     
-                     for(let i = 1; i<columns; i++){
-                     let limit = ((Math.log(i)/Math.log(degree+1))+1) | 0
-                     
-                     
-                     for (let j = 0; j<limit; j++){
-                     
-                     }
-                     }*/
 
                     let nextPage = "<div id='nextPage'>";
                     nextPage += "<h1>Use the fields bellow to insert the predictors</h1>";
